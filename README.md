@@ -10,6 +10,7 @@ Compile the tests with these instructions as listed and in order of:
 *valgrind --leak-check=full ./lab5_tests < tests.in
 
 When running the main file it will give you an option to choose what AI each side should have and how the board should look like. Here are a few examples of input:
+
 Exampe 1:
 .K..Q...
 ........
@@ -39,3 +40,4 @@ Example 3:
 ........
 
 This should run all relevant code.
+
