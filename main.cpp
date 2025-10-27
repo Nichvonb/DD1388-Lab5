@@ -72,7 +72,7 @@ int main() {
         std::cout << "Invalid choice. Please try again.\n";
     }
 
-    // 50 move rules counter nad max
+    // 50 move rules counter
     int moveNoCapturePawnCounter = 0;
     const int maxMoveNoCapturePawn = 100; // 50*2
 
@@ -81,7 +81,7 @@ int main() {
 
     while (game_on) 
     {
-        // capture list before choosing a move
+        // Create capture list before choosing a move
         auto capturingMovesBefore = b1.capturingMoves(white);
 
         // Pick strategyfor each side
@@ -188,7 +188,7 @@ int main() {
                 std::cout << b1 << "\nNo available and/or legal moves left for " << (white ? "White" : "Black") << ".\n";
                 break;
             }
-            // lambda function & is used so it can affect the variables since we want to modify sim board
+            // Lambda function & is used so it can affect the variables since we want to modify sim board
             // makes simboard and checks if it forces opponent any capturing moves       
             auto move_forces_opponent_capture = [&](const ChessBoard &board, const ChessMove &m, char promotion) -> bool
             {
@@ -196,7 +196,7 @@ int main() {
                 ChessBoard sim_board = board; 
                 // std::cout << "SimBoard before move:" << std::endl;
                 // std::cout << sim_board << std::endl;
-                //move piece in sim board
+                // Move piece in sim board
                 sim_board.movePiece(m, promotion);
                 // std::cout << "SimBoard after move:" << std::endl;
                 // std::cout << sim_board << std::endl;
@@ -210,10 +210,10 @@ int main() {
             char chosen_promotion = 'E';
             bool found_move_with_opp = false;
 
-            // Try to find a move that does NOT force the opponent into a capturing move.
+            // Try to find a move that does NOT force the opponent to a capturing move.
             for (const auto &move : moves)
             {
-                // Determine if this move qualifies as a pawn promotion.
+                // Determine if this move is qualifiable as a pawn promotion.
                 bool isPromotion = ((move.piece->latin1Representation() == 'P' && move.to_y == 8) ||
                                     (move.piece->latin1Representation() == 'p' && move.to_y == 1));
                 
@@ -279,7 +279,6 @@ int main() {
             // std::cout << "Executing chosen move from (" << chosen_move.from_x << ", " << chosen_move.from_y << ") to ("
             //         << chosen_move.to_x << ", " << chosen_move.to_y << ") with promotion: " << chosen_promotion << std::endl;
             
-            // 50-move rule
             bool isPawnMove = (chosen_move.piece->latin1Representation()=='P' ||
                                chosen_move.piece->latin1Representation()=='p');
             bool isCapture = false;
@@ -320,7 +319,7 @@ int main() {
         if (!response.empty() && (response[0] == 'q' || response[0] == 'Q')){ break;}
 
 
-        // 50-move rule
+        // 50 move rule
         if (moveNoCapturePawnCounter >= maxMoveNoCapturePawn) {
             std::cout << "Draw by 50-move rule.\n";
             break;
